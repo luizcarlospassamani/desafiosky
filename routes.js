@@ -13,7 +13,7 @@ router.post('/singin', async (req, res) => {
     try{
         const user = await User.findByCredentials(req.body.email, req.body.senha)
         const token = await user.generateAuthToken()
-        //console.log(token)
+        console.log(token)
 
         res.send({user, token})
     } catch(e) {
