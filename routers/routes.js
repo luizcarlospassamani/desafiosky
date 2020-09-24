@@ -6,18 +6,17 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log(req.body)
-    res.send("Home..")
+    res.json("Home..")
 })
 
 router.post('/singin', async (req, res) => {
     try{
         const user = await User.findByCredentials(req.body.email, req.body.senha)
         const token = await user.generateAuthToken()
-        console.log(token)
 
-        res.send({user, token})
+        res.status(201).json({user, token})
     } catch(e) {
-        res.status(400).send({message: e.message})
+        res.status(401).json({message: e.message})
     }
 })
 
@@ -26,28 +25,26 @@ router.post('/singup', async (req, res) => {
     try {
         await user.save()
         const token = await user.generateAuthToken()
-        //console.log(token)
-        res.status(201).send({user, token})
+        res.status(201).json({user, token})
     } catch(e) {
-        res.status(400).send({message: e.message})
+        res.status(400).json({message: e.message})
     }
 })
 
 router.get('/buscar/:id', auth, async(req, res)=> {
-    //console.log("buscando usuarios mongodb")
     try {
         const user = await User.findById(req.params.id)
-        res.status(201).send(user)
+        res.status(201).json(user)
     } catch (e) {
-        res.status(400).send({message: e.message})
+        res.status(401).json({message: e.message})
     }
 })
 
-router.get('/buscar', async(req, res)=> {
+/*router.get('/buscar', async(req, res)=> {
     console.log("buscando usuarios mongodb")
     const user = await User.find()
     res.json(user)
-})
+})*/
 
 module.exports = { 
     router 

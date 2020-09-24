@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
         trim: true,
-        //unique: true,
     },
     email: {
         type: String,
@@ -19,7 +18,7 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) {
-                throw new Error('Email invalido');
+                throw new Error('Unable email');
             }
         },
     },
@@ -65,7 +64,7 @@ userSchema.methods.generateAuthToken = async function () {
     const token = jwt.sign(
         { _id: user._id.toString() },
         process.env.JWT_SECRET,
-        { expiresIn: 15 }
+        { expiresIn: 1800 }
     );
 
     user.tokens = user.tokens.concat({ token });
@@ -78,12 +77,12 @@ userSchema.statics.findByCredentials = async (email, senha) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-        throw new Error('Unable login');
+        throw new Error('Unable login/password');
     }
     const isMatch = await bcrypt.compare(senha, user.senha);
 
     if (!isMatch) {
-        throw new Error('Unable login');
+        throw new Error('Unable password');
     }
 
     return user;
@@ -98,6 +97,14 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+userSchema.post('save', function(error, doc, next) {
+    if (error.name === 'MongoError' && error.code === 11000) {
+      next(new Error('Existing email'));
+    } else {
+      next(error);
+    }
+  });
 
 const User = mongoose.model('User', userSchema);
 
