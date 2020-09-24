@@ -1,11 +1,10 @@
 const express = require('express')
-const path = require('path')
 
 //const bodyParser = require('body-parser')
 //app.use(bodyParser.json({limit: '5mb'}))
 
 const errorHandler = require('./middleware/errorhandler')
-const { router } = require('./routes')
+const { router } = require('./routers/routes')
 
 const app = express()
 //app.use(express.static(path.join(__dirname, 'public')))

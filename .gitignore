@@ -8,6 +8,7 @@ npm-debug.log
 .DS_Store
 .package-lock.json
 .yarn-lock
+.yarn-error.log
 
 # Docker
 Dockerfile

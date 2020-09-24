@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "parser": "babel-eslint",
+    "extends": "eslint:recommended",
+    "plugins": ["prettier"],
+    "rules": {
+        "max-len": [
+        "error",
+        { "code": 100, "ignoreComments": true, "ignoreTemplateLiterals": true }
+        ],
+        "radix": "off",
+        "no-undef": "off",
+        "no-var": "error",
+        "consistent-return": "off",
+        "prefer-const": [
+        "error",
+        {
+            "destructuring": "any"
+        }
+        ]
+    }
+}
+  

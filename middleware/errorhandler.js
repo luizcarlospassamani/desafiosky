@@ -1,6 +1,6 @@
-// import { HttpError, NotFoundError } from "../error"
+
+/*eslint no-unused-vars: ["error", { "args": "none" }]*/
 const colors = require('colors')
-const { NextFunction, Request, Response } = require('express');
 
 function notFound(req, res, next) {
   res.status(404)

@@ -1,6 +1,6 @@
 const express = require('express')
-const auth = require('./middleware/auth')
-const User = require('./models/user')
+const auth = require('../middleware/auth')
+const User = require('../models/user')
 
 const router = express.Router();
 
@@ -33,10 +33,16 @@ router.post('/singup', async (req, res) => {
     }
 })
 
-router.get('/buscar', auth, async(req, res)=> {
+router.get('/buscar/:id', auth, async(req, res)=> {
+    //console.log("buscando usuarios mongodb")
+    const usuario = await User.findById(req.params.id)
+    res.send(usuario)
+})
+
+router.get('/buscar', async(req, res)=> {
     console.log("buscando usuarios mongodb")
     const usuario = await User.find()
-    res.send('Buscando users: ' + usuario)
+    res.send(usuario)
 })
 
 module.exports = { 
