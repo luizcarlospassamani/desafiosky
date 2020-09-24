@@ -17,7 +17,7 @@ router.post('/singin', async (req, res) => {
 
         res.send({user, token})
     } catch(e) {
-        res.status(400).send()
+        res.status(400).send({message: e.message})
     }
 })
 
@@ -29,20 +29,24 @@ router.post('/singup', async (req, res) => {
         //console.log(token)
         res.status(201).send({user, token})
     } catch(e) {
-        res.status(400).send(e)
+        res.status(400).send({message: e.message})
     }
 })
 
 router.get('/buscar/:id', auth, async(req, res)=> {
     //console.log("buscando usuarios mongodb")
-    const usuario = await User.findById(req.params.id)
-    res.send(usuario)
+    try {
+        const user = await User.findById(req.params.id)
+        res.status(201).send(user)
+    } catch (e) {
+        res.status(400).send({message: e.message})
+    }
 })
 
 router.get('/buscar', async(req, res)=> {
     console.log("buscando usuarios mongodb")
-    const usuario = await User.find()
-    res.send(usuario)
+    const user = await User.find()
+    res.json(user)
 })
 
 module.exports = { 

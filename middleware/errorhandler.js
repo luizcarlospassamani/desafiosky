@@ -2,7 +2,8 @@
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
 const colors = require('colors')
 
-function notFound(req, res, next) {
+
+const notFound = (req, res, next) => {
   res.status(404)
 
   res.send({
@@ -12,7 +13,7 @@ function notFound(req, res, next) {
   })
 }
 
-function validationError(err, req, res, next) {
+const validationError = (err, req, res, next) => {
   const status = err.status
   let message = err.message
 
@@ -26,7 +27,7 @@ function validationError(err, req, res, next) {
   }
 }
 
-function unauthorizedError(err, req, res, next) {
+const unauthorizedError = (err, req, res, next) => {
   const status = err.status
   let message = err.message
 
@@ -40,7 +41,7 @@ function unauthorizedError(err, req, res, next) {
   }
 }
 
-function forbiddenError(err, req, res, next) {
+const forbiddenError = (err, req, res, next) => {
   const status = err.status
   let message = err.message
 
@@ -54,7 +55,7 @@ function forbiddenError(err, req, res, next) {
   }
 }
 
-function serverError(err, req, res, next) {
+const serverError = (err, req, res, next) => {
   console.log(`
   ${colors.blue('✖️  ✖️  ✖️  Something went wrong:  ✖️  ✖️  ✖️')}
   ${colors.bgBlue(err.stack)}

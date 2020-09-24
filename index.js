@@ -24,7 +24,7 @@ module.exports = app
 
 /**
  * 200 Sucesso
- * 300 Redirecionament
+ * 300 Redirecionamento
  * 400 Erro de requisição
  * 500 Erro no servidor
  */
