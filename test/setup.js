@@ -1,5 +1,5 @@
-import 'jest-extended'
+import 'jest-extended';
 
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 
-jest.setTimeout(30000)
+jest.setTimeout(30000);

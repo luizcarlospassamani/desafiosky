@@ -1,7 +1,14 @@
-// const request = require('./request')
+require('dotenv').config();
 
-describe('errorHandler', () => {
-    it('Response with 200', () => {
-        expect(Array.isArray(['your', 'array'])).toBe(true)
-    })
-})
+// const request = require('supertest');
+// const app = require('../app');
+
+describe('Handling Responses', () => {
+  it('Responses with status 200 families', async () => {
+    expect(Array.isArray(['some', 'tests'])).toBe(true);
+  });
+
+  it('Errors with status 400 families', () => {
+    expect(Array.isArray(['some', 'tests'])).toBe(true);
+  });
+});

@@ -1,8 +1,8 @@
+require('dotenv').config();
 
-require('dotenv').config()
+const app = require('./app');
 
-const app = require('./index')
+const port = process.env.PORT || 8000;
 
-const port = process.env.PORT || 8000
-
-app.listen(port, () => console.log(`Listening on ${ port }`))
+/* eslint-disable no-console */
+app.listen(port, () => console.log(`Listening on ${port}`));
